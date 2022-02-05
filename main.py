@@ -17,9 +17,9 @@ while running:
             running = False
 
     # Fill the background with white
-    screen.fill((255, 255, 255))
+    screen.fill((150, 150, 150))
 
-    # Draw a solid blue circle in the center
+    # Draw
     pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
 
     # Flip the display
