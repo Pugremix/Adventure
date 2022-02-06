@@ -6,10 +6,8 @@ pygame.init()
 screen = pygame.display.set_mode([800, 960])
 pygame.display.set_caption("Adventure")
 
-# Fill background
-screen.fill((150, 150, 150))
-
 # Draw character
+color = (255, 255, 255)
 x = 375
 y = 500
 width = 40
@@ -38,7 +36,7 @@ while running:
         y += vel
 
     screen.fill((150, 150, 150))
-    pygame.draw.rect(screen, (255, 255, 255), (x, y, width, height))
+    pygame.draw.rect(screen, color, (x, y, width, height))
     pygame.display.flip()
 
 # Quit
