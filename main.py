@@ -8,8 +8,8 @@ pygame.display.set_caption("Adventure")
 
 # Draw
 color = (255, 255, 255)
-x = 375
-y = 500
+x = 385
+y = 600
 width = 20
 height = 25
 character = pygame.Rect(x, y, width, height)
@@ -17,11 +17,13 @@ vel = 5
 # Walls
 vertical_width = 40
 vertical_height = 850
-horizontal_width = 700
+horizontal_width = 325
 horizontal_height = 50
 left_wall = pygame.Rect(0, 0, vertical_width, vertical_height)
 right_wall = pygame.Rect(760, 0, vertical_width, vertical_height)
-room_1 = [left_wall, right_wall]
+south_left = pygame.Rect(0, 800, horizontal_width, horizontal_height)
+south_right = pygame.Rect(460, 800, horizontal_width, horizontal_height)
+room_1 = [left_wall, right_wall, south_left, south_right]
 
 # Run until user asks to quit
 running = True
@@ -49,12 +51,18 @@ while running:
         x += vel
     if pygame.Rect.colliderect(right_wall, character) == True:
         x -= vel
+    if pygame.Rect.colliderect(south_left, character) == True:
+        y -= vel
+    if pygame.Rect.colliderect(south_right, character) == True:
+        y -= vel
 
     # Draw
     screen.fill((150, 150, 150))
 
     pygame.draw.rect(screen, color, left_wall)
     pygame.draw.rect(screen, color, right_wall)
+    pygame.draw.rect(screen, color, south_left)
+    pygame.draw.rect(screen, color, south_right)
 
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
