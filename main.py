@@ -9,7 +9,7 @@ pygame.display.set_caption("Adventure")
 # Draw
 color = (255, 255, 255)
 x = 385
-y = 600
+y = 620
 width = 20
 height = 25
 character = pygame.Rect(x, y, width, height)
@@ -24,12 +24,14 @@ south_left = pygame.Rect(0, 800, 325, horizontal_height)
 south_right = pygame.Rect(460, 800, 325, horizontal_height)
 north_left = pygame.Rect(0, 0, 165, horizontal_height)
 north_right = pygame.Rect(620, 0, 165, horizontal_height)
+# Room
 room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right]
+room_number = 1
 
 # Run until user asks to quit
 running = True
 while running:
-    pygame.time.delay(40)
+    pygame.time.delay(30)
 
     # Did user click the close button?
     for event in pygame.event.get():
@@ -48,13 +50,13 @@ while running:
         y += vel
 
     # Collisions
-    if pygame.Rect.colliderect(left_wall, character) == True:
+    if pygame.Rect.colliderect(left_wall, character):
         x += vel
-    if pygame.Rect.colliderect(right_wall, character) == True:
+    if pygame.Rect.colliderect(right_wall, character):
         x -= vel
-    if pygame.Rect.colliderect(south_left, character) or pygame.Rect.colliderect(south_right, character) == True:
+    if pygame.Rect.colliderect(south_left, character) or pygame.Rect.colliderect(south_right, character):
         y -= vel
-    if pygame.Rect.colliderect(north_left, character) or pygame.Rect.colliderect(north_right, character) == True:
+    if pygame.Rect.colliderect(north_left, character) or pygame.Rect.colliderect(north_right, character):
         y += vel
 
     # Draw
