@@ -10,6 +10,8 @@ pygame.display.set_caption("Adventure")
 color = (255, 255, 255)
 x = 385
 y = 620
+old_x = 385
+old_y = 620
 width = 20
 height = 25
 character = pygame.Rect(x, y, width, height)
@@ -42,6 +44,9 @@ while running:
 
     keys = pygame.key.get_pressed()
 
+    old_x = x
+    old_y = y
+
     if keys[pygame.K_LEFT]:
         x -= vel
     if keys[pygame.K_RIGHT]:
@@ -52,14 +57,12 @@ while running:
         y += vel
 
     # Collisions
-    if pygame.Rect.colliderect(left_wall, character):
-        x += vel
-    if pygame.Rect.colliderect(right_wall, character):
-        x -= vel
-    if pygame.Rect.colliderect(south_left, character) or pygame.Rect.colliderect(south_right, character):
-        y -= vel
-    if pygame.Rect.colliderect(north_left, character) or pygame.Rect.colliderect(north_right, character):
-        y += vel
+    character = pygame.Rect(x, y, width, height)
+
+    for wall in room_1:
+        if pygame.Rect.colliderect(wall, character):
+            x = old_x
+            y = old_y
 
     # New room
     if (y > 825) and (room_number == 1):
