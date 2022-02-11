@@ -29,7 +29,8 @@ north_right = pygame.Rect(620, 0, 180, horizontal_height)
 # Room
 room_number = 1
 room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right]
-room_2 = [north_left, north_right]
+room_2 = [south_left, south_right, north_left, north_right]
+rooms = [0, room_1, room_2]
 
 
 # Run until user asks to quit
@@ -58,8 +59,7 @@ while running:
 
     # Collisions
     character = pygame.Rect(x, y, width, height)
-
-    for wall in room_1:
+    for wall in rooms[room_number]:
         if pygame.Rect.colliderect(wall, character):
             x = old_x
             y = old_y
