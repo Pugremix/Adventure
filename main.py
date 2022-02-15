@@ -23,12 +23,13 @@ vertical_width = 40
 vertical_height = 850
 horizontal_height = 50
 # Coordinates
-left_wall = pygame.Rect(0, 0, vertical_width, vertical_height)
-right_wall = pygame.Rect(760, 0, vertical_width, vertical_height)
 south_left = pygame.Rect(0, 800, 325, horizontal_height)
 south_right = pygame.Rect(460, 800, 340, horizontal_height)
-north_left = pygame.Rect(0, 0, 165, horizontal_height)
-north_right = pygame.Rect(620, 0, 180, horizontal_height)
+north_left = pygame.Rect(0, 0, 325, horizontal_height)
+north_right = pygame.Rect(460, 0, 340, horizontal_height)
+# Barriers
+left_wall = pygame.Rect(0, 0, vertical_width, vertical_height)
+right_wall = pygame.Rect(760, 0, vertical_width, vertical_height)
 south = pygame.Rect(0, 800, 800, horizontal_height)
 north = pygame.Rect(0, 0, 800, horizontal_height)
 # Room
@@ -96,14 +97,17 @@ while running:
     if (room_number == 1):
         pygame.draw.rect(screen, color, south_left)
         pygame.draw.rect(screen, color, south_right)
-    pygame.draw.rect(screen, color, north_left)
-    pygame.draw.rect(screen, color, north_right)
+    if (room_number == 1) or (room_number == 2):
+        pygame.draw.rect(screen, color, north_left)
+        pygame.draw.rect(screen, color, north_right)
     if (room_number == 2):
         pygame.draw.rect(screen, color, south)
 
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
-    yellow_key(100, 175)
+    if (room_number == 1):
+        yellow_key(100, 175)
+
     pygame.display.flip()
 
 # Quit
