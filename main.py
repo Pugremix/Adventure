@@ -20,16 +20,19 @@ vel = 5
 vertical_width = 40
 vertical_height = 850
 horizontal_height = 50
+# Coordinates
 left_wall = pygame.Rect(0, 0, vertical_width, vertical_height)
 right_wall = pygame.Rect(760, 0, vertical_width, vertical_height)
 south_left = pygame.Rect(0, 800, 325, horizontal_height)
 south_right = pygame.Rect(460, 800, 340, horizontal_height)
 north_left = pygame.Rect(0, 0, 165, horizontal_height)
 north_right = pygame.Rect(620, 0, 180, horizontal_height)
+south = pygame.Rect(0, 800, 800, horizontal_height)
+north = pygame.Rect(0, 0, 800, horizontal_height)
 # Room
 room_number = 1
 room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right]
-room_2 = [south_left, south_right, north_left, north_right]
+room_2 = [south, north_left, north_right]
 rooms = [0, room_1, room_2]
 
 
@@ -84,10 +87,13 @@ while running:
     if (room_number == 1):
         pygame.draw.rect(screen, color, left_wall)
         pygame.draw.rect(screen, color, right_wall)
-    pygame.draw.rect(screen, color, south_left)
-    pygame.draw.rect(screen, color, south_right)
+    if (room_number == 1):
+        pygame.draw.rect(screen, color, south_left)
+        pygame.draw.rect(screen, color, south_right)
     pygame.draw.rect(screen, color, north_left)
     pygame.draw.rect(screen, color, north_right)
+    if (room_number == 2):
+        pygame.draw.rect(screen, color, south)
 
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
