@@ -16,6 +16,8 @@ width = 20
 height = 25
 character = pygame.Rect(x, y, width, height)
 vel = 5
+# Items
+yellow_key = pygame.image.load('key.png')
 # Walls
 vertical_width = 40
 vertical_height = 850
