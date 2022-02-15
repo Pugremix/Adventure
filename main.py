@@ -83,6 +83,10 @@ while running:
     if (room_number == 2):
         color = (0, 210, 70)
 
+    # Define
+    def yellow_key(yellow_key_x, yellow_key_y):
+        screen.blit(key_yellow, (yellow_key_x, yellow_key_y))
+
     # Draw
     screen.fill((150, 150, 150))
 
@@ -99,8 +103,7 @@ while running:
 
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
-    def yellow_key():
-        screen.blit(key_yellow, (50, 50))
+    yellow_key(100, 175)
     pygame.display.flip()
 
 # Quit
