@@ -75,14 +75,14 @@ while running:
     if (y > 825) and (room_number == 1):
         y = 20
         room_number = 2
-    if (y < 5) and (room_number == 2):
+    if (y < 0) and (room_number == 2):
         y = 800
         room_number = 1
     if (x > 780) and (room_number == 2):
         x = 20
         room_number = 3
-    if (x < 5) and (room_number == 3):
-        x = 775
+    if (x < 0) and (room_number == 3):
+        x = 760
         room_number = 2
 
     # Room properties
