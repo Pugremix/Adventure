@@ -36,7 +36,8 @@ north = pygame.Rect(0, 0, 800, horizontal_height)
 room_number = 1
 room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right]
 room_2 = [south, north_left, north_right]
-rooms = [0, room_1, room_2]
+room_3 = [north, south_left, south_right]
+rooms = [0, room_1, room_2, room_3]
 
 
 # Run until user asks to quit
@@ -77,6 +78,12 @@ while running:
     if (y < 5) and (room_number == 2):
         y = 800
         room_number = 1
+    if (x > 780) and (room_number == 2):
+        x = 20
+        room_number = 3
+    if (x < 5) and (room_number == 3):
+        x = 775
+        room_number = 2
 
     # Room properties
     if (room_number == 1):
@@ -94,7 +101,7 @@ while running:
     if (room_number == 1):
         pygame.draw.rect(screen, color, left_wall)
         pygame.draw.rect(screen, color, right_wall)
-    if (room_number == 1):
+    if (room_number == 1) or (room_number == 3):
         pygame.draw.rect(screen, color, south_left)
         pygame.draw.rect(screen, color, south_right)
     if (room_number == 1) or (room_number == 2):
@@ -102,6 +109,8 @@ while running:
         pygame.draw.rect(screen, color, north_right)
     if (room_number == 2):
         pygame.draw.rect(screen, color, south)
+    if (room_number == 3):
+        pygame.draw.rect(screen, color, north)
 
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
