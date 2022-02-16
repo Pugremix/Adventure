@@ -90,6 +90,8 @@ while running:
         color = (200, 200, 0)
     if (room_number == 2):
         color = (0, 210, 70)
+    if (room_number == 3):
+        color = (130, 150, 50)
 
     # Define
     def yellow_key(yellow_key_x, yellow_key_y):
