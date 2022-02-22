@@ -18,6 +18,7 @@ character = pygame.Rect(x, y, width, height)
 vel = 5
 # Items
 key_yellow = pygame.image.load('yellow_key.png')
+item_held = 0
 # Walls
 vertical_width = 40
 vertical_height = 850
@@ -96,6 +97,8 @@ while running:
     # Define
     def yellow_key(yellow_key_x, yellow_key_y):
         screen.blit(key_yellow, (yellow_key_x, yellow_key_y))
+    yellow_key_x = 100
+    yellow_key_y = 175
 
     # Draw
     screen.fill((150, 150, 150))
@@ -117,7 +120,7 @@ while running:
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
     if (room_number == 1):
-        yellow_key(100, 175)
+        yellow_key(yellow_key_x, yellow_key_y)
 
     pygame.display.flip()
 
