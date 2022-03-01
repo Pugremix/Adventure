@@ -7,6 +7,7 @@ screen = pygame.display.set_mode([800, 960])
 pygame.display.set_caption("Adventure")
 
 # Draw
+# Character
 color = (255, 255, 255)
 x = 385
 y = 620
@@ -17,6 +18,7 @@ height = 25
 character = pygame.Rect(x, y, width, height)
 vel = 5
 # Items
+# Yellow Key
 key_yellow = pygame.image.load('yellow_key.png')
 yellow_key_x = 100
 yellow_key_y = 175
@@ -67,6 +69,8 @@ while running:
         y -= vel
     if keys[pygame.K_DOWN]:
         y += vel
+    if keys[pygame.K_SPACE]:
+        item_held = 0
 
     # Collisions
     character = pygame.Rect(x, y, width, height)
