@@ -18,12 +18,11 @@ height = 25
 character = pygame.Rect(x, y, width, height)
 vel = 5
 # Items
+item_held = 0
 # Yellow Key
 key_yellow = pygame.image.load('yellow_key.png')
 yellow_key_x = 100
 yellow_key_y = 175
-yellow_key = pygame.Rect(yellow_key_x, yellow_key_y, 40, 15)
-item_held = 0
 # Walls
 vertical_width = 40
 vertical_height = 850
@@ -58,17 +57,28 @@ while running:
 
     keys = pygame.key.get_pressed()
 
+    # Character
     old_x = x
     old_y = y
+    # Yellow Key
+    yellow_key = pygame.Rect(yellow_key_x, yellow_key_y, 40, 15)
 
     if keys[pygame.K_LEFT]:
         x -= vel
+        if item_held == 1:
+            yellow_key_x -= vel
     if keys[pygame.K_RIGHT]:
         x += vel
+        if item_held == 1:
+            yellow_key_x += vel
     if keys[pygame.K_UP]:
         y -= vel
+        if item_held == 1:
+            yellow_key_y -= vel
     if keys[pygame.K_DOWN]:
         y += vel
+        if item_held == 1:
+            yellow_key_y += vel
     if keys[pygame.K_SPACE]:
         item_held = 0
 
@@ -128,6 +138,8 @@ while running:
         the_yellow_key(yellow_key_x, yellow_key_y)
     if (room_number == 1) and pygame.Rect.colliderect(yellow_key, character):
         item_held = 1
+        yellow_key_x += x - old_x
+        yellow_key_y += y - old_y
 
     pygame.display.flip()
 
