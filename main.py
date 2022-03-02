@@ -113,9 +113,15 @@ while running:
     if (x > 780) and (room_number == 2):
         x = 20
         room_number = 3
+        if item_held == 1:
+            yellow_key_x -= 765
+            yellow_key_room = 3
     if (x < 0) and (room_number == 3):
         x = 760
         room_number = 2
+        if item_held == 1:
+            yellow_key_x += 765
+            yellow_key_room = 2
 
     # Room properties
     if (room_number == 1):
