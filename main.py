@@ -21,6 +21,7 @@ vel = 5
 item_held = 0
 # Yellow Key
 key_yellow = pygame.image.load('yellow_key.png')
+yellow_key_room = 1
 yellow_key_x = 100
 yellow_key_y = 175
 yellow_key_old_x = 100
@@ -100,9 +101,15 @@ while running:
     if (y > 825) and (room_number == 1):
         y = 20
         room_number = 2
+        if item_held == 1:
+            yellow_key_y -= 810
+            yellow_key_room = 2
     if (y < 0) and (room_number == 2):
         y = 800
         room_number = 1
+        if item_held == 1:
+            yellow_key_y += 805
+            yellow_key_room = 1
     if (x > 780) and (room_number == 2):
         x = 20
         room_number = 3
@@ -141,9 +148,9 @@ while running:
 
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
-    if (room_number == 1):
+    if (room_number == yellow_key_room):
         the_yellow_key(yellow_key_x, yellow_key_y)
-    if (room_number == 1) and pygame.Rect.colliderect(yellow_key, character):
+    if (room_number == yellow_key_room) and pygame.Rect.colliderect(yellow_key, character):
         item_held = 1
         yellow_key_x += x - old_x
         yellow_key_y += y - old_y
