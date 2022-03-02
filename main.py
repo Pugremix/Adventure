@@ -23,6 +23,8 @@ item_held = 0
 key_yellow = pygame.image.load('yellow_key.png')
 yellow_key_x = 100
 yellow_key_y = 175
+yellow_key_old_x = 100
+yellow_key_old_y = 175
 # Walls
 vertical_width = 40
 vertical_height = 850
@@ -62,6 +64,8 @@ while running:
     old_y = y
     # Yellow Key
     yellow_key = pygame.Rect(yellow_key_x, yellow_key_y, 40, 15)
+    yellow_key_old_x = yellow_key_x
+    yellow_key_old_y = yellow_key_y
 
     if keys[pygame.K_LEFT]:
         x -= vel
@@ -88,6 +92,9 @@ while running:
         if pygame.Rect.colliderect(wall, character):
             x = old_x
             y = old_y
+            if item_held == 1:
+                yellow_key_x = yellow_key_old_x
+                yellow_key_y = yellow_key_old_y
 
     # New room
     if (y > 825) and (room_number == 1):
