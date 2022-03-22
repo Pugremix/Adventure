@@ -45,7 +45,8 @@ room_number = 1
 room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right]
 room_2 = [south, north_left, north_right]
 room_3 = [north, south_left, south_right]
-rooms = [0, room_1, room_2, room_3]
+room_4 = [south, north_left, north_right]
+rooms = [0, room_1, room_2, room_3, room_4]
 
 
 # Run until user asks to quit loop
@@ -122,6 +123,17 @@ while running:
         if item_held == 1:
             yellow_key_x += 765
             yellow_key_room = 2
+    if (x < 0) and (room_number == 2):
+        x = 760
+        room_number = 4
+        yellow_key_x += 765
+        yellow_key_room = 4
+    if (x > 780) and (room_number == 4):
+        x = 20
+        room_number = 2
+        if item_held == 1:
+            yellow_key_x -= 765
+            yellow_key_room = 2
 
     # Room properties
     if (room_number == 1):
@@ -130,6 +142,8 @@ while running:
         color = (0, 210, 70)
     if (room_number == 3):
         color = (130, 150, 50)
+    if (room_number == 4):
+        color = (100, 175, 50)
 
     # Define
     def the_yellow_key(yellow_key_x, yellow_key_y):
