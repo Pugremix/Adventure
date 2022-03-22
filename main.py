@@ -48,7 +48,7 @@ room_3 = [north, south_left, south_right]
 rooms = [0, room_1, room_2, room_3]
 
 
-# Run until user asks to quit
+# Run until user asks to quit loop
 running = True
 while running:
     pygame.time.delay(30)
@@ -138,6 +138,7 @@ while running:
     # Draw
     screen.fill((150, 150, 150))
 
+    # Draw room loop
     for walls in rooms[room_number]:
         pygame.draw.rect(screen, color, walls)
 
