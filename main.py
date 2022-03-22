@@ -139,18 +139,14 @@ while running:
     screen.fill((150, 150, 150))
 
     if (room_number == 1):
-        pygame.draw.rect(screen, color, left_wall)
-        pygame.draw.rect(screen, color, right_wall)
-    if (room_number == 1) or (room_number == 3):
-        pygame.draw.rect(screen, color, south_left)
-        pygame.draw.rect(screen, color, south_right)
-    if (room_number == 1) or (room_number == 2):
-        pygame.draw.rect(screen, color, north_left)
-        pygame.draw.rect(screen, color, north_right)
+        for walls in room_1:
+            pygame.draw.rect(screen, color, walls)
     if (room_number == 2):
-        pygame.draw.rect(screen, color, south)
+        for walls in room_2:
+            pygame.draw.rect(screen, color, walls)
     if (room_number == 3):
-        pygame.draw.rect(screen, color, north)
+        for walls in room_3:
+            pygame.draw.rect(screen, color, walls)
 
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
