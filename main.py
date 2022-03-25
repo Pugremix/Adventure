@@ -28,8 +28,8 @@ class Item:
         self.item_old_x = item_old_x
         self.item_old_y = item_old_y
     # Define
-    def draw_items(self, yellow_key_x, yellow_key_y):
-        screen.blit(self.image, (yellow_key_x, yellow_key_y))
+    def draw_items(self):
+        screen.blit(self.image, (self.item_x, self.item_y))
     # Update
     def update_items(self):
         self.item_old_x = self.item_x
@@ -164,7 +164,7 @@ while running:
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
     if (room_number == key_yellow.item_room):
-        key_yellow.draw_items(key_yellow.item_x, key_yellow.item_y)
+        key_yellow.draw_items()
     if (room_number == key_yellow.item_room) and pygame.Rect.colliderect(draw_yellow, character):
         item_held = 1
         key_yellow.item_x += x - old_x
