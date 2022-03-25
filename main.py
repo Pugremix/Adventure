@@ -29,11 +29,6 @@ class Item:
         self.item_old_y = item_old_y
 # Yellow Key
 key_yellow = Item('yellow_key.png', 1, 100, 175, 100, 175)
-# yellow_key_room = 1
-# yellow_key_x = 100
-# yellow_key_y = 175
-# yellow_key_old_x = 100
-# yellow_key_old_y = 175
 # Walls
 vertical_width = 40
 vertical_height = 850
@@ -73,7 +68,7 @@ while running:
     old_x = x
     old_y = y
     # Yellow Key
-    yellow_key = pygame.Rect(key_yellow.item_x, key_yellow.item_y, 40, 15)
+    draw_yellow = pygame.Rect(key_yellow.item_x, key_yellow.item_y, 40, 15)
     key_yellow.item_old_x = key_yellow.item_x
     key_yellow.item_old_y = key_yellow.item_y
 
@@ -168,7 +163,7 @@ while running:
     character = pygame.Rect(x, y, width, height)
     if (room_number == key_yellow.item_room):
         the_yellow_key(key_yellow.item_x, key_yellow.item_y)
-    if (room_number == key_yellow.item_room) and pygame.Rect.colliderect(yellow_key, character):
+    if (room_number == key_yellow.item_room) and pygame.Rect.colliderect(draw_yellow, character):
         item_held = 1
         key_yellow.item_x += x - old_x
         key_yellow.item_y += y - old_y
