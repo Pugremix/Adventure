@@ -27,7 +27,10 @@ class Item:
         self.item_y = item_y
         self.item_old_x = item_old_x
         self.item_old_y = item_old_y
-# Yellow Key
+    # Define
+    def draw_items(self, yellow_key_x, yellow_key_y):
+        screen.blit(self.image, (yellow_key_x, yellow_key_y))
+# Images
 key_yellow = Item('yellow_key.png', 1, 100, 175, 100, 175)
 # Walls
 vertical_width = 40
@@ -148,10 +151,6 @@ while running:
     if (room_number == 4):
         color = (100, 175, 50)
 
-    # Define
-    def the_yellow_key(yellow_key_x, yellow_key_y):
-        screen.blit(key_yellow.image, (yellow_key_x, yellow_key_y))
-
     # Draw
     screen.fill((150, 150, 150))
 
@@ -162,7 +161,7 @@ while running:
     pygame.draw.rect(screen, color, character)
     character = pygame.Rect(x, y, width, height)
     if (room_number == key_yellow.item_room):
-        the_yellow_key(key_yellow.item_x, key_yellow.item_y)
+        key_yellow.draw_items(key_yellow.item_x, key_yellow.item_y)
     if (room_number == key_yellow.item_room) and pygame.Rect.colliderect(draw_yellow, character):
         item_held = 1
         key_yellow.item_x += x - old_x
