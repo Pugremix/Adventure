@@ -30,6 +30,10 @@ class Item:
     # Define
     def draw_items(self, yellow_key_x, yellow_key_y):
         screen.blit(self.image, (yellow_key_x, yellow_key_y))
+    # Update
+    def update_items(self):
+        self.item_old_x = self.item_x
+        self.item_old_y = self.item_y
 # Images
 key_yellow = Item('yellow_key.png', 1, 100, 175, 100, 175)
 # Walls
@@ -72,8 +76,7 @@ while running:
     old_y = y
     # Yellow Key
     draw_yellow = pygame.Rect(key_yellow.item_x, key_yellow.item_y, 40, 15)
-    key_yellow.item_old_x = key_yellow.item_x
-    key_yellow.item_old_y = key_yellow.item_y
+    key_yellow.update_items()
 
     if keys[pygame.K_LEFT]:
         x -= vel
