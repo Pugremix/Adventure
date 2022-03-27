@@ -35,6 +35,9 @@ class Item:
     def update_items(self):
         self.item_old_x = self.item_x
         self.item_old_y = self.item_y
+    def move_back(self):
+        self.item_x = self.item_old_x
+        self.item_y = self.item_old_y
 # Images
 key_yellow = Item('yellow_key.png', 1, 100, 175, 100, 175)
 # Walls
@@ -105,8 +108,7 @@ while running:
             x = old_x
             y = old_y
             if item_held == 1:
-                key_yellow.item_x = key_yellow.item_old_x
-                key_yellow.item_y = key_yellow.item_old_y
+                key_yellow.move_back()
 
     # New room
     if (y > 825) and (room_number == 1):
