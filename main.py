@@ -7,19 +7,37 @@ screen = pygame.display.set_mode([800, 960])
 pygame.display.set_caption("Adventure")
 
 # Objects
-# Global
+# All
 color = (255, 255, 255)
 vel = 5
 # Character
-x = 385
-y = 620
-old_x = 385
-old_y = 620
-width = 20
-height = 25
-character = pygame.Rect(x, y, width, height)
+class Character:
+    def __init__(self, x=385, y=620, old_x=385, old_y=620, width=20, height=25, room_number=1, item_held=0):
+        self.x = x
+        self.y = y
+        self.old_x = old_x
+        self.old_y = old_y
+        self.width = width
+        self.height = height
+        self.room_number = room_number
+        self.item_held = item_held
+    def draw_character(self):
+        pygame.draw.rect(screen, color, pygame.Rect(self.x, self.y, self.width, self.height))
+    def update_character(self):
+        self.old_x = self.x
+        self.old_y = self.y
+    def hitdetect(self):
+        self.character = pygame.Rect(self.x, self.y, self.width, self.height)
+        for wall in rooms[self.room_number]:
+            if pygame.Rect.colliderect(wall, self.character):
+                self.move_back_character()
+                if self.item_held == 1:
+                    key_yellow.move_back_item()
+    def move_back_character(self):
+        self.x = self.old_x
+        self.y = self.old_y
+player = Character()
 # Items
-item_held = 0
 class Item:
     def __init__(self, image_name, item_room, item_x, item_y, item_old_x, item_old_y):
         self.image = pygame.image.load(image_name)
@@ -35,7 +53,7 @@ class Item:
     def update_items(self):
         self.item_old_x = self.item_x
         self.item_old_y = self.item_y
-    def move_back(self):
+    def move_back_item(self):
         self.item_x = self.item_old_x
         self.item_y = self.item_old_y
 # Images
@@ -55,7 +73,6 @@ right_wall = pygame.Rect(760, 0, vertical_width, vertical_height)
 south = pygame.Rect(0, 800, 800, horizontal_height)
 north = pygame.Rect(0, 0, 800, horizontal_height)
 # Room
-room_number = 1
 room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right]
 room_2 = [south, north_left, north_right]
 room_3 = [north, south_left, south_right]
@@ -76,102 +93,103 @@ while running:
     keys = pygame.key.get_pressed()
 
     # Character
-    old_x = x
-    old_y = y
+    player.update_character()
     # Yellow Key
     draw_yellow = pygame.Rect(key_yellow.item_x, key_yellow.item_y, 40, 15)
     key_yellow.update_items()
 
     if keys[pygame.K_LEFT]:
-        x -= vel
-        if item_held == 1:
+        player.x -= vel
+        if player.item_held == 1:
             key_yellow.item_x -= vel
     if keys[pygame.K_RIGHT]:
-        x += vel
-        if item_held == 1:
+        player.x += vel
+        if player.item_held == 1:
             key_yellow.item_x += vel
     if keys[pygame.K_UP]:
-        y -= vel
-        if item_held == 1:
+        player.y -= vel
+        if player.item_held == 1:
             key_yellow.item_y -= vel
     if keys[pygame.K_DOWN]:
-        y += vel
-        if item_held == 1:
+        player.y += vel
+        if player.item_held == 1:
             key_yellow.item_y += vel
     if keys[pygame.K_SPACE]:
         item_held = 0
 
     # Collisions
-    character = pygame.Rect(x, y, width, height)
-    for wall in rooms[room_number]:
-        if pygame.Rect.colliderect(wall, character):
-            x = old_x
-            y = old_y
-            if item_held == 1:
-                key_yellow.move_back()
+    player.hitdetect()
+    # for wall in rooms[room_number]:
+    #     if pygame.Rect.colliderect(wall, character):
+    #         player.move_back_character()
+    #         if item_held == 1:
+    #             key_yellow.move_back_item()
 
     # New room
-    if (y > 825) and (room_number == 1):
-        y = 20
-        room_number = 2
-        if item_held == 1:
+    if (player.y > 825) and (player.room_number == 1):
+        player.y = 20
+        player.room_number = 2
+        if player.item_held == 1:
             key_yellow.item_y -= 810
             key_yellow.item_room = 2
-    if (y < 0) and (room_number == 2):
-        y = 800
-        room_number = 1
-        if item_held == 1:
+    if (player.y < 0) and (player.room_number == 2):
+        player.y = 800
+        player.room_number = 1
+        if player.item_held == 1:
             key_yellow.item_y += 805
             key_yellow.item_room = 1
-    if (x > 780) and (room_number == 2):
-        x = 20
-        room_number = 3
-        if item_held == 1:
+    if (player.x > 780) and (player.room_number == 2):
+        player.x = 20
+        player.room_number = 3
+        if player.item_held == 1:
             key_yellow.item_x -= 765
             key_yellow.item_room = 3
-    if (x < 0) and (room_number == 3):
-        x = 760
-        room_number = 2
-        if item_held == 1:
+    if (player.x < 0) and (player.room_number == 3):
+        player.x = 760
+        player.room_number = 2
+        if player.item_held == 1:
             key_yellow.item_x += 765
             key_yellow.item_room = 2
-    if (x < 0) and (room_number == 2):
-        x = 760
-        room_number = 4
-        key_yellow.item_x += 765
-        key_yellow.item_room = 4
-    if (x > 780) and (room_number == 4):
-        x = 20
-        room_number = 2
-        if item_held == 1:
+    if (player.x < 0) and (player.room_number == 2):
+        player.x = 760
+        player.room_number = 4
+        if player.item_held == 1:
+            key_yellow.item_x += 765
+            key_yellow.item_room = 4
+    if (player.x > 780) and (player.room_number == 4):
+        player.x = 20
+        player.room_number = 2
+        if player.item_held == 1:
             key_yellow.item_x -= 765
             key_yellow.item_room = 2
 
     # Room properties
-    if (room_number == 1):
+    if (player.room_number == 1):
         color = (200, 200, 0)
-    if (room_number == 2):
+    if (player.room_number == 2):
         color = (0, 210, 70)
-    if (room_number == 3):
+    if (player.room_number == 3):
         color = (130, 150, 50)
-    if (room_number == 4):
+    if (player.room_number == 4):
         color = (100, 175, 50)
 
     # Draw
     screen.fill((150, 150, 150))
 
     # Draw room loop
-    for walls in rooms[room_number]:
+    for walls in rooms[player.room_number]:
         pygame.draw.rect(screen, color, walls)
 
-    pygame.draw.rect(screen, color, character)
-    character = pygame.Rect(x, y, width, height)
-    if (room_number == key_yellow.item_room):
+    # Draw Character
+    player.draw_character()
+    # player = pygame.Rect(x, y, width, height)
+
+    if (player.room_number == key_yellow.item_room):
         key_yellow.draw_items()
-    if (room_number == key_yellow.item_room) and pygame.Rect.colliderect(draw_yellow, character):
-        item_held = 1
-        key_yellow.item_x += x - old_x
-        key_yellow.item_y += y - old_y
+    if (player.room_number == key_yellow.item_room) and pygame.Rect.colliderect(draw_yellow, player.character):
+        player.item_held = 1
+        key_yellow.item_x += player.x - player.old_x
+        key_yellow.item_y += player.y - player.old_y
 
     pygame.display.flip()
 
