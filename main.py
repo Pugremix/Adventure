@@ -6,9 +6,11 @@ pygame.init()
 screen = pygame.display.set_mode([800, 960])
 pygame.display.set_caption("Adventure")
 
-# Draw
-# Character
+# Objects
+# Global
 color = (255, 255, 255)
+vel = 5
+# Character
 x = 385
 y = 620
 old_x = 385
@@ -16,7 +18,6 @@ old_y = 620
 width = 20
 height = 25
 character = pygame.Rect(x, y, width, height)
-vel = 5
 # Items
 item_held = 0
 class Item:
