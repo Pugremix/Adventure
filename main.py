@@ -117,7 +117,7 @@ while running:
         if player.item_held == 1:
             key_yellow.item_y += vel
     if keys[pygame.K_SPACE]:
-        item_held = 0
+        player.item_held = 0
 
     # Collisions
     player.hitdetect()
