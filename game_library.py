@@ -2,7 +2,9 @@
 import pygame
 pygame.init()
 
+
 # Classes
+
 # Character (Holds all information about Character)
 class Character:
     def __init__(self, x=385, y=620, old_x=385, old_y=620, width=20, height=25, room_number=1, item_held=None):
@@ -29,3 +31,23 @@ class Character:
     def move_back_character(self):
         self.x = self.old_x
         self.y = self.old_y
+
+# Items (Holds all information about in-game items)
+class Item:
+    def __init__(self, image_name, item_room, item_x, item_y, item_old_x, item_old_y):
+        self.image = pygame.image.load(image_name)
+        self.item_room = item_room
+        self.item_x = item_x
+        self.item_y = item_y
+        self.item_old_x = item_old_x
+        self.item_old_y = item_old_y
+    # Define
+    def draw_items(self, screen):
+        screen.blit(self.image, (self.item_x, self.item_y))
+    # Update
+    def update_items(self):
+        self.item_old_x = self.item_x
+        self.item_old_y = self.item_y
+    def move_back_item(self):
+        self.item_x = self.item_old_x
+        self.item_y = self.item_old_y

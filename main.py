@@ -1,7 +1,7 @@
 # Import and initialize libraries
 import pygame
-pygame.init()
 import game_library
+pygame.init()
 
 # Window
 screen = pygame.display.set_mode([800, 960])
@@ -13,27 +13,8 @@ color = (255, 255, 255)
 vel = 5
 # Character (Retrieves information about Character from the game library)
 player = game_library.Character()
-# Items (Holds all information about in-game items)
-class Item:
-    def __init__(self, image_name, item_room, item_x, item_y, item_old_x, item_old_y):
-        self.image = pygame.image.load(image_name)
-        self.item_room = item_room
-        self.item_x = item_x
-        self.item_y = item_y
-        self.item_old_x = item_old_x
-        self.item_old_y = item_old_y
-    # Define
-    def draw_items(self):
-        screen.blit(self.image, (self.item_x, self.item_y))
-    # Update
-    def update_items(self):
-        self.item_old_x = self.item_x
-        self.item_old_y = self.item_y
-    def move_back_item(self):
-        self.item_x = self.item_old_x
-        self.item_y = self.item_old_y
 # Load images
-key_yellow = Item('yellow_key.png', 1, 100, 175, 100, 175)
+key_yellow = game_library.Item('yellow_key.png', 1, 100, 175, 100, 175)
 # Walls
 # General
 vertical_width = 40
@@ -157,7 +138,7 @@ while running:
     player.draw_character(screen, color)
 
     if (player.room_number == key_yellow.item_room):
-        key_yellow.draw_items()
+        key_yellow.draw_items(screen)
     if (player.room_number == key_yellow.item_room) and pygame.Rect.colliderect(draw_yellow, player.character):
         player.item_held = key_yellow
         key_yellow.item_x += player.x - player.old_x
