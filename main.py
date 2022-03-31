@@ -84,39 +84,39 @@ while running:
     if (player.y > 825) and (player.room_number == 1):
         player.y = 20
         player.room_number = 2
-        if player.item_held == key_yellow:
-            key_yellow.item_y -= 810
-            key_yellow.item_room = 2
+        if player.item_held != None:
+            player.item_held.item_y -= 810
+            player.item_held.item_room = 2
     if (player.y < 0) and (player.room_number == 2):
         player.y = 800
         player.room_number = 1
-        if player.item_held == key_yellow:
-            key_yellow.item_y += 805
-            key_yellow.item_room = 1
+        if player.item_held != None:
+            player.item_held.item_y += 805
+            player.item_held.item_room = 1
     if (player.x > 780) and (player.room_number == 2):
         player.x = 20
         player.room_number = 3
-        if player.item_held == key_yellow:
-            key_yellow.item_x -= 765
-            key_yellow.item_room = 3
+        if player.item_held != None:
+            player.item_held.item_x -= 765
+            player.item_held.item_room = 3
     if (player.x < 0) and (player.room_number == 3):
         player.x = 760
         player.room_number = 2
-        if player.item_held == key_yellow:
-            key_yellow.item_x += 765
-            key_yellow.item_room = 2
+        if player.item_held != None:
+            player.item_held.item_x += 765
+            player.item_held.item_room = 2
     if (player.x < 0) and (player.room_number == 2):
         player.x = 760
         player.room_number = 4
-        if player.item_held == key_yellow:
-            key_yellow.item_x += 765
-            key_yellow.item_room = 4
+        if player.item_held != None:
+            player.item_held.item_x += 765
+            player.item_held.item_room = 4
     if (player.x > 780) and (player.room_number == 4):
         player.x = 20
         player.room_number = 2
-        if player.item_held == key_yellow:
-            key_yellow.item_x -= 765
-            key_yellow.item_room = 2
+        if player.item_held != None:
+            player.item_held.item_x -= 765
+            player.item_held.item_room = 2
 
     # Room properties
     if (player.room_number == 1):
