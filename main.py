@@ -59,20 +59,20 @@ while running:
 
     if keys[pygame.K_LEFT]:
         player.x -= vel
-        if player.item_held == key_yellow:
-            key_yellow.item_x -= vel
+        if player.item_held != None:
+            player.item_held.item_x -= vel
     if keys[pygame.K_RIGHT]:
         player.x += vel
-        if player.item_held == key_yellow:
-            key_yellow.item_x += vel
+        if player.item_held != None:
+            player.item_held.item_x += vel
     if keys[pygame.K_UP]:
         player.y -= vel
-        if player.item_held == key_yellow:
-            key_yellow.item_y -= vel
+        if player.item_held != None:
+            player.item_held.item_y -= vel
     if keys[pygame.K_DOWN]:
         player.y += vel
-        if player.item_held == key_yellow:
-            key_yellow.item_y += vel
+        if player.item_held != None:
+            player.item_held.item_y += vel
     if keys[pygame.K_SPACE]:
         player.item_held = None
 
