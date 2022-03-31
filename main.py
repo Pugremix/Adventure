@@ -137,6 +137,7 @@ while running:
     # Draw Character
     player.draw_character(screen, color)
 
+    # Draw Items
     if (player.room_number == key_yellow.item_room):
         key_yellow.draw_items(screen)
     if (player.room_number == key_yellow.item_room) and pygame.Rect.colliderect(draw_yellow, player.character):
