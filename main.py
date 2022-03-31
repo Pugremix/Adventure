@@ -77,7 +77,6 @@ while running:
         player.item_held = None
 
     # Collisions
-    player.item_held
     player.hitdetect(rooms)
 
     # New room
