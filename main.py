@@ -4,7 +4,7 @@ import game_library
 pygame.init()
 
 # Window
-screen = pygame.display.set_mode([800, 960])
+screen = pygame.display.set_mode([800, 750])
 pygame.display.set_caption("Adventure")
 
 # Objects
@@ -15,21 +15,23 @@ vel = 5
 player = game_library.Character()
 # Load images
 key_yellow = game_library.Item('yellow_key.png', 1, 100, 175, 100, 175)
+yellow_castle = game_library.Castle('yellow_castle.png')
 # Walls
 # General
 vertical_width = 40
-vertical_height = 850
+vertical_height = 750
 horizontal_height = 50
+full_length = 700
 # Coordinates
 # Opening walls
-south_left = pygame.Rect(0, 800, 325, horizontal_height)
-south_right = pygame.Rect(460, 800, 340, horizontal_height)
-north_left = pygame.Rect(0, 0, 325, horizontal_height)
-north_right = pygame.Rect(460, 0, 340, horizontal_height)
+south_left = pygame.Rect(0, full_length, 300, horizontal_height)
+south_right = pygame.Rect(465, full_length, 340, horizontal_height)
+north_left = pygame.Rect(0, 0, 300, horizontal_height)
+north_right = pygame.Rect(465, 0, 340, horizontal_height)
 # Full walls
 left_wall = pygame.Rect(0, 0, vertical_width, vertical_height)
 right_wall = pygame.Rect(760, 0, vertical_width, vertical_height)
-south = pygame.Rect(0, 800, 800, horizontal_height)
+south = pygame.Rect(0, full_length, 800, horizontal_height)
 north = pygame.Rect(0, 0, 800, horizontal_height)
 # Rooms
 room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right]
@@ -80,17 +82,17 @@ while running:
     player.hitdetect(rooms)
 
     # New room
-    if (player.y > 825) and (player.room_number == 1):
+    if (player.y > 725) and (player.room_number == 1):
         player.y = 20
         player.room_number = 2
         if player.item_held != None:
-            player.item_held.item_y -= 810
+            player.item_held.item_y -= 710
             player.item_held.item_room = 2
     if (player.y < 0) and (player.room_number == 2):
-        player.y = 800
+        player.y = 705
         player.room_number = 1
         if player.item_held != None:
-            player.item_held.item_y += 805
+            player.item_held.item_y += 710
             player.item_held.item_room = 1
     if (player.x > 780) and (player.room_number == 2):
         player.x = 20
@@ -133,6 +135,10 @@ while running:
     # Draw room loop
     for walls in rooms[player.room_number]:
         pygame.draw.rect(screen, color, walls)
+    # Draw Castles
+    if (player.room_number == 1):
+        yellow_castle.draw_castle(screen)
+
     # Draw Character
     player.draw_character(screen, color)
 

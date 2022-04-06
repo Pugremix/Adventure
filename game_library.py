@@ -7,7 +7,7 @@ pygame.init()
 
 # Character (Holds all information about Character)
 class Character:
-    def __init__(self, x=385, y=620, old_x=385, old_y=620, width=20, height=25, room_number=1, item_held=None):
+    def __init__(self, x=385, y=520, old_x=385, old_y=520, width=20, height=25, room_number=1, item_held=None):
         self.x = x
         self.y = y
         self.old_x = old_x
@@ -51,3 +51,11 @@ class Item:
     def move_back_item(self):
         self.item_x = self.item_old_x
         self.item_y = self.item_old_y
+
+# Castles
+class Castle:
+    def __init__(self, image_name):
+        self.image = pygame.image.load(image_name)
+    # Define
+    def draw_castle(self, screen):
+        screen.blit(self.image, (185, 0))
