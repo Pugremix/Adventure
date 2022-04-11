@@ -7,7 +7,7 @@ pygame.init()
 
 # Character (Holds all information about Character)
 class Character:
-    def __init__(self, x=385, y=520, old_x=385, old_y=520, width=20, height=25, room_number=1, item_held=None):
+    def __init__(self, x=375, y=420, old_x=375, old_y=420, width=20, height=25, room_number=1, item_held=None):
         self.x = x
         self.y = y
         self.old_x = old_x
