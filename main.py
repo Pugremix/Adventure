@@ -15,7 +15,7 @@ vel = 5
 player = game_library.Character()
 # Load images
 key_yellow = game_library.Item('yellow_key.png', 1, 100, 175, 100, 175)
-yellow_castle = game_library.Castle('yellow_castle.png')
+yellow_castle = game_library.Castle('yellow_castle.png', 'Gate.png')
 # Walls
 # General
 vertical_width = 40
@@ -140,12 +140,14 @@ while running:
     # Draw room loop
     for walls in rooms[player.room_number]:
         pygame.draw.rect(screen, color, walls)
-    # Draw Castles
-    if (player.room_number == 1):
-        yellow_castle.draw_castle(screen)
 
     # Draw Character
     player.draw_character(screen, color)
+
+    # Foreground
+    # Draw Castles
+    if (player.room_number == 1):
+        yellow_castle.draw_castle(screen)
 
     # Draw Items
     if (player.room_number == key_yellow.item_room):
