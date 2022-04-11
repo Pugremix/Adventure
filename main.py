@@ -35,8 +35,8 @@ south = pygame.Rect(0, full_length, 800, horizontal_height)
 north = pygame.Rect(0, 0, 800, horizontal_height)
 # Castle walls
 towers = pygame.Rect(185, 25, 400, 185)
-castle_left = pygame.Rect(225, 25, 40, 20)
-castle_right = pygame.Rect(185, 25, 40, 20)
+castle_left = pygame.Rect(225, 210, 120, 160)
+castle_right = pygame.Rect(425, 210, 120, 160)
 # Rooms
 room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right, towers, castle_left, castle_right]
 room_2 = [south, north_left, north_right]
