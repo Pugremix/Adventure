@@ -14,7 +14,7 @@ vel = 5
 # Character (Retrieves information about Character from the game library)
 player = game_library.Character()
 # Load images
-key_yellow = game_library.Item('yellow_key.png', 1, 100, 175, 100, 175)
+key_yellow = game_library.Item('yellow_key.png', 1, 120, 205, 120, 205)
 yellow_castle = game_library.Castle('yellow_castle.png', 'Gate.png')
 # Walls
 # General
@@ -38,17 +38,19 @@ towers = pygame.Rect(185, 25, 400, 185)
 castle_left = pygame.Rect(225, 210, 120, 160)
 castle_right = pygame.Rect(425, 210, 120, 160)
 # Rooms
+room_0 = [left_wall, right_wall, north, south_left, south_right]
 room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right, towers, castle_left, castle_right]
 room_2 = [south, north_left, north_right]
 room_3 = [north, south_left, south_right]
 room_4 = [south, north_left, north_right]
-rooms = [0, room_1, room_2, room_3, room_4]
+gates = [0, room_1]
+rooms = [room_0, room_1, room_2, room_3, room_4]
 
 
 # Run until user asks to quit loop
 running = True
 while running:
-    pygame.time.delay(30)
+    pygame.time.delay(25)
 
     # Did user click the close button?
     for event in pygame.event.get():
@@ -86,6 +88,22 @@ while running:
     player.hitdetect(rooms)
 
     # New room
+    # Yellow Castle
+    if (player.y < 300) and (345 < player.x < 425) and (player.room_number == 1):
+        player.y = 705
+        player.room_number = 0
+        if player.item_held != None:
+            player.item_held.item_y += 410
+            player.item_held.item_room = 0
+    if (player.y > 725) and (player.room_number == 0):
+        player.y = 320
+        player.x = 375
+        player.room_number = 1
+        if player.item_held != None:
+            player.item_held.item_y -= 410
+            player.item_held.item_x += player.x - player.old_x
+            player.item_held.item_room = 1
+
     if (player.y > 725) and (player.room_number == 1):
         player.y = 20
         player.room_number = 2
@@ -124,6 +142,8 @@ while running:
             player.item_held.item_room = 2
 
     # Room properties
+    if (player.room_number == 0):
+        color = (200, 200, 0)
     if (player.room_number == 1):
         color = (200, 200, 0)
     if (player.room_number == 2):
