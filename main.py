@@ -37,13 +37,13 @@ north = pygame.Rect(0, 0, 800, horizontal_height)
 towers = pygame.Rect(185, 25, 400, 185)
 castle_left = pygame.Rect(225, 210, 120, 160)
 castle_right = pygame.Rect(425, 210, 120, 160)
+gate = pygame.Rect(345, 290, 80, 80)
 # Rooms
 room_0 = [left_wall, right_wall, north, south_left, south_right]
-room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right, towers, castle_left, castle_right]
+room_1 = [left_wall, right_wall, south_left, south_right, north_left, north_right, towers, castle_left, castle_right, gate]
 room_2 = [south, north_left, north_right]
 room_3 = [north, south_left, south_right]
 room_4 = [south, north_left, north_right]
-gates = [0, room_1]
 rooms = [room_0, room_1, room_2, room_3, room_4]
 
 
@@ -158,7 +158,8 @@ while running:
     screen.fill((150, 150, 150))
     # Draw room loop
     for walls in rooms[player.room_number]:
-        pygame.draw.rect(screen, color, walls)
+        if (walls != gate):
+            pygame.draw.rect(screen, color, walls)
 
     # Draw Character
     player.draw_character(screen, color)
