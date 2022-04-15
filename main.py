@@ -15,7 +15,7 @@ vel = 5
 player = game_library.Character()
 # Load images
 key_yellow = game_library.Item('yellow_key.png', 1, 120, 205, 120, 205)
-yellow_castle = game_library.Castle('yellow_castle.png', 'Gate.png')
+yellow_castle = game_library.Castle('yellow_castle.png', 'Gate.png', 1)
 # Walls
 # General
 vertical_width = 40

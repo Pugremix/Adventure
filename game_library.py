@@ -54,9 +54,11 @@ class Item:
 
 # Castles
 class Castle:
-    def __init__(self, image_name, gate_image):
+    def __init__(self, image_name, gate_image, castle_room, open_gate=False):
         self.image = pygame.image.load(image_name)
         self.gate = pygame.image.load(gate_image)
+        self.castle_room = castle_room
+        self.open_gate = open_gate
     # Define
     def draw_castle(self, screen):
         screen.blit(self.gate, (365, 290))
