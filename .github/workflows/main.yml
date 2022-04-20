@@ -63,10 +63,7 @@ jobs:
           pyinstaller main.spec
           cd dist/
           mv main.exe Adventure.exe
-          Compress-Archive Adventure.exe release_windows.zip
-          Compress-Archive main.exe release_windows.zip
-          Compress-Archive dist/main.exe release_windows.zip
-          Compress-Archive dist\main.exe release_windows.zip
+          Compress-Archive Adventure.exe ../release_windows.zip
         #run: pip install -r requirements.txt pyinstaller
         #run: pyinstaller main.spec
 
