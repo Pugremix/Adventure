@@ -54,7 +54,7 @@ jobs:
           pyinstaller main.spec
           cd dist
           mv main Adventure
-          zip ../release_macos.zip
+          zip ../release_macos.zip Adventure
         #with:
         #    python-version: 3.7
 
