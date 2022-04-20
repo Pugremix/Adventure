@@ -16,7 +16,7 @@ pygame.display.set_caption("Adventure")
 
 # Errors
 HasError = False
-ErrorFont = pygame.font.Font(pygame.font.get_default_font(), 35)
+ErrorFont = pygame.font.SysFont('system', 36)
 
 # Objects
 # All
