@@ -17,6 +17,18 @@ jobs:
 
     - run: pip install -r requirements.txt pyinstaller
     - run: pyinstaller main.spec
+    - name: release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ github.ref }}
+        body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
     # Optionally verify that it works (provided that it does not need user interaction)
     #- ./dist/your-code/your-code
     - uses: actions/upload-artifact@v2
