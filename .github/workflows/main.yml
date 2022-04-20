@@ -1,36 +1,61 @@
 on:
   push:
-
+    tags:
+      - 'v*'
 jobs:
-  build:
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+  build_release:
+    name: Build Release
+    needs: create_release  
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: ['windows-latest', 'macos-latest']
-
+        include:
+          - os: macos-latest
+            release_suffix: mac
+          - os: windows-latest
+            release_suffix: windows
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
+    #- uses: actions/checkout@v2
+    #- uses: actions/setup-python@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - run: pip install -r requirements.txt pyinstaller
-    - run: pyinstaller main.spec
-    - name: release
-      uses: actions/create-release@v1
-      id: create_release
-      with:
-        draft: false
-        prerelease: false
-        release_name: ${{ steps.version.outputs.version }}
-        tag_name: ver-${{ github.sha }}
-        body_path: CHANGELOG.md
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+      - name: Run Mac Build
+        if: matrix.os == 'macos-latest'
+        run: echo "MacOS Latest" > release_mac
+        with:
+            python-version: 3.7
 
+      - name: Run Windows Build
+        if: matrix.os == 'windows-latest'
+        run: echo "Windows Latest" > release_windows   
+        with:
+            python-version: 3.7
+
+      - run: pip install -r requirements.txt pyinstaller
+      - run: pyinstaller main.spec
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.create_release.outputs.tag-name }}
+          files: release_${{ matrix.release_suffix }}
     # Optionally verify that it works (provided that it does not need user interaction)
     #- ./dist/your-code/your-code
-    - uses: actions/upload-artifact@v2
-      with:
-        path: dist/*
+    #- uses: actions/upload-artifact@v2
+    #  with:
+    #    path: dist/*
