@@ -17,9 +17,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           #name: ${{ github.ref_name }}
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+          #tag_name: ${{ steps.tag.outputs.release_tag }}
           #name: ver-${{ github.sha }}          
-          #tag_name: ver-${{ github.sha }}
+          tag_name: ver-${{ github.sha }}
           draft: false
           prerelease: false
           generate_release_notes: false
@@ -69,7 +69,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           #tag_name: ${{ needs.create_release.outputs.tag-name }}
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+          #tag_name: ${{ steps.tag.outputs.release_tag }}
+          tag_name: ver-${{ github.sha }}
           files: release_${{ matrix.release_suffix }}
     # Optionally verify that it works (provided that it does not need user interaction)
     #- ./dist/your-code/your-code
