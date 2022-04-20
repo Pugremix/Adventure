@@ -1,6 +1,8 @@
 # Import and initialize libraries
 import pygame
 import game_library
+import sys
+
 pygame.init()
 
 #Greg Pringle - needed to add this function to build .exe for Mr. Manning
