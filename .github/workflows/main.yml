@@ -3,7 +3,16 @@ on:
 #    tags:
 #      - 'v*'
 jobs:
-  create_release:
+  generate_release_tag:
+    name: Generate Tag
+    runs-on: windows-latest
+    steps:
+      - name : create tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"  
+
+  create_release:        
     name: Create Release
     runs-on: windows-latest
     steps:
@@ -12,6 +21,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           #name: ${{ github.ref_name }}
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           name: ver-${{ github.sha }}          
           draft: false
           prerelease: false
