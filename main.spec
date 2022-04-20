@@ -1,4 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
+
 def Datafiles(*filenames, **kw):
     import os
     
@@ -17,6 +18,7 @@ def Datafiles(*filenames, **kw):
 
 block_cipher = None
 
+imagefiles = Datafiles('black_key.png', 'yellow_key.png',  'Castle.png', 'Gate.png', 'yellow_castle.png' )
 
 a = Analysis(
     ['main.py'],
@@ -33,34 +35,28 @@ a = Analysis(
     cipher=block_cipher,
     noarchive=False,
 )
-imagefiles = Datafiles('black_key.png', 'yellow_key.png',  'Castle.png', 'Gate.png', 'yellow_castle.png' )
+
+
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
 exe = EXE(
     pyz,
     a.scripts,
-    [],
-    exclude_binaries=True,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    imagefiles,
     name='main',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
     console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-)
-coll = COLLECT(
-    exe,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
-    imagefiles,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    name='main',
 )
