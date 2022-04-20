@@ -50,9 +50,11 @@ jobs:
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
         run: |
-          echo "MacOS Latest" > release_mac.zip
           pip install -r requirements.txt pyinstaller
           pyinstaller main.spec
+          cd dist
+          mv main Adventure
+          zip ../release_macos.zip
         #with:
         #    python-version: 3.7
 
