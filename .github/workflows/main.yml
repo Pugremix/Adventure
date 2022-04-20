@@ -50,7 +50,7 @@ jobs:
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
         run: |
-          echo "MacOS Latest" > release_mac
+          echo "MacOS Latest" > release_mac.zip
           pip install -r requirements.txt pyinstaller
           pyinstaller main.spec
         #with:
@@ -63,7 +63,7 @@ jobs:
           pyinstaller main.spec
           cd dist/
           mv main.exe Adventure.exe
-          zip -r9 release_windows Adventure.exe
+          Compress-Archive Adventure.exe release_windows.zip
         #run: pip install -r requirements.txt pyinstaller
         #run: pyinstaller main.spec
 
@@ -73,7 +73,7 @@ jobs:
           #tag_name: ${{ needs.create_release.outputs.tag-name }}
           #tag_name: ${{ steps.tag.outputs.release_tag }}
           tag_name: ver-${{ github.sha }}
-          files: release_${{ matrix.release_suffix }}
+          files: release_${{ matrix.release_suffix }}.zip
     # Optionally verify that it works (provided that it does not need user interaction)
     #- ./dist/your-code/your-code
     #- uses: actions/upload-artifact@v2
