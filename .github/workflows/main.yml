@@ -59,9 +59,11 @@ jobs:
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
         run: |
-          echo "Windows Latest" > release_windows   
           pip install -r requirements.txt pyinstaller
           pyinstaller main.spec
+          cd dist/
+          mv main.exe Adventure.exe
+          zip -r9 release_windows Adventure.exe
         #run: pip install -r requirements.txt pyinstaller
         #run: pyinstaller main.spec
 
