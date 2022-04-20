@@ -47,8 +47,6 @@ jobs:
           echo "MacOS Latest" > release_mac
           pip install -r requirements.txt pyinstaller
           pyinstaller main.spec
-          with:
-            python-version: 3.7
         #with:
         #    python-version: 3.7
 
@@ -58,8 +56,6 @@ jobs:
           echo "Windows Latest" > release_windows   
           pip install -r requirements.txt pyinstaller
           pyinstaller main.spec
-          with:
-            python-version: 3.7
         #run: pip install -r requirements.txt pyinstaller
         #run: pyinstaller main.spec
 
