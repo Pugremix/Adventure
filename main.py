@@ -3,6 +3,11 @@ import pygame
 import game_library
 pygame.init()
 
+#Greg Pringle - needed to add this function to build .exe for Mr. Manning
+if getattr(sys, 'frozen', False):  #change directory to temp unpack folder if run from single compressed application
+    os.chdir(sys._MEIPASS)
+
+
 # Window
 screen = pygame.display.set_mode([800, 750])
 pygame.display.set_caption("Adventure")
