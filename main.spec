@@ -18,7 +18,7 @@ def Datafiles(*filenames, **kw):
 
 block_cipher = None
 
-imagefiles = Datafiles('black_key.png', 'yellow_key.png',  'Castle.png', 'Gate.png', 'yellow_castle.png' )
+imagefiles = Datafiles('yellow_key.png', 'black_key.png', 'sword.png', 'yellow_castle.png', 'Gate.png',)
 
 a = Analysis(
     ['main.py'],
