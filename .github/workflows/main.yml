@@ -36,18 +36,25 @@ jobs:
 
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
-        run: echo "MacOS Latest" > release_mac
-        with:
+        run: |
+          echo "MacOS Latest" > release_mac
+          pip install -r requirements.txt pyinstaller
+          pyinstaller main.spec
+          with:
             python-version: 3.7
+        #with:
+        #    python-version: 3.7
 
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
-        run: echo "Windows Latest" > release_windows   
-        with:
+        run: |
+          echo "Windows Latest" > release_windows   
+          pip install -r requirements.txt pyinstaller
+          pyinstaller main.spec
+          with:
             python-version: 3.7
-
-      - run: pip install -r requirements.txt pyinstaller
-      - run: pyinstaller main.spec
+        #run: pip install -r requirements.txt pyinstaller
+        #run: pyinstaller main.spec
 
       - name: Release
         uses: softprops/action-gh-release@v1
