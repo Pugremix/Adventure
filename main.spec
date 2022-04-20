@@ -33,7 +33,7 @@ a = Analysis(
     cipher=block_cipher,
     noarchive=False,
 )
-imagefiles = Datafiles('black_key.png', 'yellow_key.png',  'Castle.png, 'yellow_castle.png' )
+imagefiles = Datafiles('black_key.png', 'yellow_key.png',  'Castle.png', 'yellow_castle.png' )
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
 exe = EXE(
